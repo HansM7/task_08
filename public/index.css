@@ -1,0 +1,52 @@
+.content_general{
+    width: 80%;
+    margin: auto;
+    margin-top: 50px;
+    border-radius: 5px;
+    border:1px solid gray;
+    background-color: #d1d1d1;
+}
+
+.div_form{
+    padding: 20px;
+}
+
+.div_data{
+    padding: 20px;
+    margin-top: 30px;
+}
+
+.img_table{
+    width: 50px;
+    height: auto;
+}
+
+.email{
+    font-weight: bold;
+    color:blue;
+
+}
+.fecha{
+    color:red
+}
+.mensaje{
+    color:green;
+    
+}
+
+.content_message{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.item_message{
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 5px;
+}
+
+#content_message_response{
+    display: none;
+}
