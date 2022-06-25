@@ -1,13 +1,15 @@
 const socket = io.connect()
 
-
 socket.on('allProductsServer', (products) => {
     renderProducts(products)
 })
 
+socket.on('allMessagesServer', (messages) => {
+    renderMessages(messages)
+})
+
 function renderProducts(products){
-    const head=`
-    <table class="table table-sm table-dark" style="width: 100%">
+    const head=`<table class="table table-sm table-dark" style="width: 100%">
         <thead>
             <tr>
                 <th>Title</th>
@@ -25,7 +27,7 @@ function renderProducts(products){
             <td><img class="img_table" src="${index.thumbnail}"></img></td>
         </tr>
         `
-    })
+    }).join(' ')
 
     const end =`
         </tbody>
@@ -37,19 +39,30 @@ function renderProducts(products){
     document.getElementById("div_content_data").innerHTML=newHtml
 }
 
+function renderMessages(messages){
+
+    const html = messages.map((index) => {
+        return `
+        <div class="item_message">
+            <span class="email">${index.email} </span><span class="fecha">[${index.date}]: </span><i class="mensaje">${index.text}</i>
+        </div>
+            `
+      }).join(' ')
+    
+    document.getElementById('content_message').innerHTML = html
+}
+
 function addProduct(){
     const title = document.getElementById('isTitle').value
-    const price = parseInt(document.getElementById('isPrice').value)
+    const price = document.getElementById('isPrice').value
     const thumbnail = document.getElementById('isThumbnail').value
 
     const content_message_response = document.getElementById('content_message_response')
 
     data={title,price,thumbnail}
-    console.log(data)
+
     axios.post('/producto',{data})
     .then((response)=>{ 
-
-        console.log(response);
 
         const state = response.data.state
 
@@ -70,35 +83,23 @@ function addProduct(){
 
         }
         
-
     })
 
 }
 
-// async function getProducts(){
-//     const response = await fetch('/productos')
-//     const products = await  response.json()
-//     return await products
-// }
+function addMessage(){
 
-window.addEventListener('load', () => { 
+    const email=document.getElementById("isUser").value
+    const text=document.getElementById("isText").value
 
-    // const allProducts=[]
+    data={email,text}
+
+    axios.post('/message',{data})
+    .then((result) => {
+        console.log(result);
+        socket.emit('processAddMessage',"Se registro un mensaje")
+    })
+
     
 
-
-    // fetch("/productos")
-    // .then((response) => {response.json})
-    // .then((data)=>{console.log(data)})
-
-    // const AllDataProducts=  getProducts()
-
-    // console.log(AllDataProducts)
-
-    // console.log("hola")
-
-    // axios.get(`/productos`)
-    // .then((response) => {response.json})
-    // .then((data)=>{console.log(data)})
-
-})
+}

@@ -5,6 +5,7 @@ const express = require('express')
 const app = express()
 
 const {routerProduct} = require('./src/product/routes/')
+const {routerChat} = require('./src/chat/routes/')
 // const {routerOther} = require('./src/Others/routes/other.router')
 
 // Instanciamiento del servidor de socket
@@ -37,22 +38,12 @@ app.get('/', (req,res) => {
 }) 
 
 app.use('/', routerProduct)
+app.use('/', routerChat)
 
-// app.use('/', routerProduct)
-// app.use('/', routerOther)
 
 const port = process.env.PORT || 3000
 const myServer=app.listen(port)
 
 const io=new Server(myServer)
 
-// io.on('connection', (socket) => {
-//     console.log('Un usuario se a conectado')
-
-//     (async function(){
-//         const products = await newProduct.getAll()
-//         io.emit("allProductsServer", products)
-//     })()
-
-// })
 instanceSockets(io)

@@ -17,7 +17,11 @@
     <div class="content_general">
 
         <div class="div_form">
-            <h4 class="text-primary">Ingrese un producto</h4>
+            <div style="display:flex;flex-direction:row">
+                <h4 class="text-primary" >Ingrese un producto</h4>
+                <h4 style="padding-left:10px" id="content_message_response"></h4>
+            </div>
+            
             <br>
             <label for="">Nombre</label>
             <input class="form-control mb-3" type="text" autocomplete="off" id="isTitle">
@@ -27,10 +31,6 @@
             <input class="form-control mb-3" type="text" autocomplete="off" id="isThumbnail">
             <button class="btn btn-success" onclick="addProduct()">Enviar datos</button>
             <br>
-            <br>
-            <div id="content_message_response" class="alert alert-success">
-                
-            </div>
         </div>
 
 
@@ -47,15 +47,15 @@
     <div class="content_general">
 
         <div class="div_form">
-            <input class="form-control" type="email" id="email" autocomplete="off">
+            <input class="form-control" type="text" id="isUser" autocomplete="off">
             <hr>
             <div id="content_message">
                 
                 
             </div>
             <br>
-            <input class="form-control mb-3 " type="text" placeholder="Ingrese su mensaje" id="mensaje" autocomplete="off">
-            <button class="btn btn-success" onclick="send_message()">Enviar mensaje</button>
+            <input class="form-control mb-3 " type="text" placeholder="Ingrese su mensaje" id="isText" autocomplete="off">
+            <button class="btn btn-success" onclick="addMessage()">Enviar mensaje</button>
         </div>
 
     </div>

@@ -15,7 +15,7 @@ const register = (req, res, next)=>{
     const {title,price,thumbnail} = req.body.data
 
     if (title!=undefined && price!=undefined && thumbnail!=undefined) {
-        if (title!="" && thumbnail !="" && title!=""){
+        if (title!="" && thumbnail !="" && price!=""){
             if (isNaN(title)===true && isNaN(thumbnail) ===true && isNaN(price)!=true) {
                 res.json({
                     state:"success",
