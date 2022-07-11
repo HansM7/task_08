@@ -3,6 +3,9 @@ const socket = io.connect()
 socket.on('allProductsServer', (products) => {
     renderProducts(products)
 })
+socket.on('allProductsServer2', (products) => {
+    renderProducts(products)
+})
 
 socket.on('allMessagesServer', (messages) => {
     renderMessages(messages)
@@ -37,6 +40,7 @@ function renderProducts(products){
     const newHtml=head+body+end
 
     document.getElementById("div_content_data").innerHTML=newHtml
+    console.log("Renderizado!")
 }
 
 function renderMessages(messages){
@@ -64,6 +68,8 @@ function addProduct(){
     axios.post('/producto',{data})
     .then((response)=>{ 
 
+        console.log(response)
+
         const state = response.data.state
 
         if (state === "error") {
@@ -79,9 +85,10 @@ function addProduct(){
                 content_message_response.style.display = 'none'
             }, 3000);
 
-            socket.emit('processAddProduct',"registro correcto")
+            
 
         }
+        socket.emit('processAddProduct',"registro correcto")
         
     })
 

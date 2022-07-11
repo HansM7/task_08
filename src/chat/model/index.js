@@ -1,15 +1,18 @@
+const knex = require('knex')
+const {options} = require("../../config/options")
+
 class Chat{
 
-    constructor(messages=[]){
-        this.messages = [{
-            email: 'example@example.com',
-            date: '24-6-2022 19:18:49',
-            text: 'Hola'
-        }]
+    constructor(){
+        this.nameTable = "chat"
+        this.database = knex(options)
     }
+
     async getAll(){
         try{
-            return this.messages
+            const data = await this.database.from(this.nameTable).select("*")
+            return data
+            
         } catch (error) {
             console.log(error)
         }
@@ -18,20 +21,12 @@ class Chat{
     async save(data){
         try {
 
-            const hoy = new Date();
-            const ant_fecha = hoy.getDate() + '-' + ( hoy.getMonth() + 1 ) + '-' + hoy.getFullYear();
-            const hora = hoy.getHours() + ':' + hoy.getMinutes() + ':' + hoy.getSeconds();
-            const date = ant_fecha + ' ' + hora;
-
             const message={}
 
             message.email=data.email
-            message.date=date
             message.text=data.text
 
-            this.messages.push(message)
-
-            return this.data
+            await this.database.from(this.nameTable).insert(message)
 
         } catch (error) {
             console.log(error);

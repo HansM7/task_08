@@ -1,10 +1,6 @@
 const Product = require('../product/model')
-const newProduct = new Product()
 
 const Chat = require('../chat/model')
-const newChat = new Chat()
-
-
 
 const fetch = require('node-fetch')
 
@@ -14,7 +10,7 @@ module.exports = (io) => {
 
         // AL RECARGAR LA PAGINA NO CARGAN TODOS LOS DATOS 
         const sendProducts = async()=>{
-            // const products = await newProduct.getAll() no me funciona la llamada al modelo, no e recupera los datos
+            
             const products = await fetch("http://localhost:3000/productos")
             const newProducts = await products.json()
             socket.emit("allProductsServer", newProducts)
@@ -23,7 +19,9 @@ module.exports = (io) => {
 
         // AL RECARGAR LA PAGINA NO CARGAN TODOS LOS DATOS 
         const sendMessages = async()=>{
-            // const messages = await newChat.getAll() no me funciona la llamada al modelo, no e recupera los datos
+            // const newChat = new Chat()
+            // const messages = await newChat.getAll() 
+            // no me funciona la llamada al modelo, no e recupera los datos
             const messages = await fetch("http://localhost:3000/messages")
             const newMessages = await messages.json()
 
@@ -37,7 +35,7 @@ module.exports = (io) => {
             const data2 = await fetch("http://localhost:3000/productos")
             const newdata = await data2.json()
 
-            io.emit("allProductsServer", newdata)
+            io.emit("allProductsServer2", newdata)
 
         })
 

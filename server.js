@@ -6,9 +6,7 @@ const app = express()
 
 const {routerProduct} = require('./src/product/routes/')
 const {routerChat} = require('./src/chat/routes/')
-// const {routerOther} = require('./src/Others/routes/other.router')
 
-// Instanciamiento del servidor de socket
 const {Server}= require('socket.io')
 
 const instanceSockets = require('./src/sockets')
